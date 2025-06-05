@@ -1,0 +1,48 @@
+<br>
+<br>
+<body class="signup">
+<%= link_to root_path, class:"back-btn" do %>
+  <i class="fas fa-arrow-left"></i> Back
+<% end %>
+<div class="form-container">
+<h2>Sign up</h2>
+
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :username,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "username" } %>
+    <%= f.input :first_name,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "first-name" } %>
+    <%= f.input :last_name,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "last-name" } %>
+    <%= f.input :email,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "email" }%>
+    <%= f.input :password,
+                required: true,
+                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                input_html: { autocomplete: "new-password" } %>
+    <%= f.input :password_confirmation,
+                required: true,
+                input_html: { autocomplete: "new-password" } %>
+    <%= f.input :photo, as: :file %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "SIGNUP" %>
+  </div>
+<% end %>
+
+
+<%= render "devise/shared/links" %>
+</div>
+</body>

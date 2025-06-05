@@ -1,0 +1,114 @@
+/* The side navigation menu */
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 300px;
+  background-color:  #5544C4;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.logo img {
+  max-width: 40px;
+  height: auto;
+  display: block;
+}
+.nav-links{
+  padding: 20px;
+}
+/* Sidebar links */
+.sidebar a {
+  display: block;
+  color: white;
+  padding: 16px;
+  text-decoration: none;
+  font-size: auto;
+}
+
+.sidebar a.active {
+  background-color: #fafafa81 !important;
+  color: white !important;
+}
+
+/* Links on mouse-over */
+.sidebar a:hover:not(.active) {
+  background-color: #fafafa81;
+  color: white;
+}
+
+/* Page content. The value of the margin-left property should match the value of the sidebar's width property */
+div.content {
+  margin-left: 200px;
+  padding: 1px 16px;
+  height: 1000px;
+}
+
+/* On screens that are less than 700px wide, make the sidebar into a topbar */
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+  div.content {margin-left: 0;}
+}
+
+/* On screens that are less than 400px, display the bar vertically, instead of horizontally */
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
+}
+
+.sidebar-wrapper {
+  width: 250px;
+  position: absolute;
+}
+
+.main-content {
+  margin-left: 250px ;
+}
+.landing-page .main-content {
+  margin-left: 0;
+}
+
+.open-navbar-icon {
+  font-size: 30px;
+  cursor: pointer;
+  display: block;
+  background: rgba(185, 185, 185, 0.85);
+  border-radius: 51px;
+  top: 10px;
+  padding: 10px;
+  left: 10px;
+}
+
+.closebtn{
+  color:white;
+  -webkit-appearance: none;
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  font-size: 30px;
+  border: none;
+  background-color:  #5544C4;
+}
+
+#navbar_username{
+color:white;
+font-size: auto;
+padding:20px;
+display: flex;
+gap: 15px;
+align-items: center;
+}
+
+hr{
+  color: rgba(248, 248, 248, 0.637);
+}
