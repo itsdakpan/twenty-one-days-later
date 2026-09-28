@@ -2,6 +2,9 @@
 
 A habit tracker you do with other people. Make a group, pick one habit, and everyone ticks off the same 21 days together.
 
+**Live demo:** https://two1-days-later.onrender.com
+Log in with `demo@21dayslater.app` / `password123`. The demo resets every night. It runs on a free server, so the first visit can take up to a minute to wake up.
+
 ![Landing page](docs/screenshots/landing.png)
 
 ## What it does
