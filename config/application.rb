@@ -2,6 +2,11 @@ require_relative "boot"
 
 require "rails/all"
 
+# Pasting secrets from notes apps can add invisible characters (like U+2028) that break the URL.
+%w[CLOUDINARY_URL DATABASE_URL].each do |key|
+  ENV[key] = ENV[key].gsub(/[[:space:]\u2028\u2029\u200B\uFEFF]/, "") if ENV[key]
+end
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
