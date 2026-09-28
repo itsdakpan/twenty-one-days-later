@@ -80,6 +80,4 @@ test:
 #
 production:
   <<: *default
-  database: twenty_one_days_later_production
-  username: twenty_one_days_later
-  password: <%= ENV["TWENTY_ONE_DAYS_LATER_DATABASE_PASSWORD"] %>
+  url: <%= ENV["DATABASE_URL"] %>

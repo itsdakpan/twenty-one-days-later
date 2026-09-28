@@ -16,6 +16,8 @@ module TwentyOneDaysLater
     end
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.2
+    # Photos are shown at their uploaded size, so no image variant processing is needed.
+    config.active_storage.variant_processor = :disabled
 
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
