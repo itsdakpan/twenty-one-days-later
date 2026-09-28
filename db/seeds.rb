@@ -25,7 +25,9 @@ users = people.map do |person|
     avatar = URI.open("https://api.dicebear.com/9.x/notionists/png?seed=#{person[:username]}&backgroundColor=ece9f3", read_timeout: 5)
     user.photo.attach(io: avatar, filename: "#{person[:username]}.png", content_type: "image/png")
   rescue StandardError => e
-    puts "  No avatar for #{person[:username]} (#{e.class}), using initials"
+    puts "  No avatar for #{person[:username]} (#{e.class}: #{e.message}), using initials"
+    # Don't leave an attachment behind that points at a file which never uploaded.
+    user.reload.photo.detach if user.photo.attached?
   end
   user
 end
