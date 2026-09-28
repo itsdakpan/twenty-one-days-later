@@ -20,7 +20,7 @@ A habit tracker you do with other people. Make a group, pick one habit, and ever
 
 ## Built with
 
-Ruby on Rails 7, PostgreSQL, Hotwire (Turbo and Stimulus), Devise, Bootstrap and SCSS, Cloudinary for profile photos.
+Ruby on Rails 8, PostgreSQL, Hotwire (Turbo and Stimulus), Devise, Bootstrap and SCSS, Cloudinary for profile photos.
 
 ## Run it locally
 
