@@ -1,32 +1,27 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Connects to data-controller="likes"
+// Adds a like to a comment.
 export default class extends Controller {
-  static targets = ['likes']
-  static values = {
-    url: String,
-  }
+  static targets = ["count", "button"]
+  static values = { url: String }
 
-  connect() {
-    this.token = document.querySelector('meta[name="csrf-token"]').content
-  }
-
-  save() {
-    const url = this.urlValue
-    // save the like to the db
-    fetch(url, {
-      method: "PATCH",
-      headers: {
-      'X-CSRF-Token': this.token
-      }
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        // update the frontend to increase the number of likes
-        const existingLikes = Number.parseInt(this.likesTarget.innerText)
-        this.likesTarget.innerText = `${existingLikes + 1} likes`
-
+  async like() {
+    this.buttonTarget.disabled = true
+    try {
+      const response = await fetch(this.urlValue, {
+        method: "PATCH",
+        headers: {
+          Accept: "application/json",
+          "X-CSRF-Token": document.querySelector("meta[name='csrf-token']").content
+        }
       })
-
+      if (!response.ok) throw new Error(`Like failed: ${response.status}`)
+      const data = await response.json()
+      this.countTarget.textContent = data.likes
+      this.buttonTarget.classList.add("liked")
+      this.buttonTarget.querySelector("i").classList.replace("fa-regular", "fa-solid")
+    } finally {
+      this.buttonTarget.disabled = false
+    }
   }
 }

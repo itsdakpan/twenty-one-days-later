@@ -1,0 +1,172 @@
+.landing {
+  .topbar { background: rgba($paper, .7); border-bottom-color: transparent; }
+}
+
+.hero {
+  padding: 3rem 0 4rem;
+  @media (min-width: 900px) { padding: 4.5rem 0 6rem; }
+
+  &__grid {
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+    @media (min-width: 900px) { grid-template-columns: 1.1fr .9fr; }
+  }
+
+  h1 {
+    font-size: clamp(2.6rem, 6vw, 4.4rem);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 1.02;
+    margin-bottom: 1.25rem;
+    em { font-style: normal; color: $coral-deep; }
+  }
+
+  &__lead {
+    font-size: 1.15rem;
+    color: $ink-soft;
+    max-width: 30rem;
+    margin-bottom: 2rem;
+  }
+
+  &__actions { display: flex; flex-wrap: wrap; gap: .75rem; }
+
+  &__art {
+    position: relative;
+    border-radius: 28px;
+    background: $tint;
+    aspect-ratio: 1 / 1;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    img { width: 82%; height: auto; position: relative; }
+    &::before {
+      content: "";
+      position: absolute;
+      width: 70%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: $coral-wash;
+      top: -12%;
+      right: -14%;
+    }
+  }
+}
+
+.together {
+  padding: 2rem 0 5rem;
+  &__panel {
+    @extend .card-surface;
+    display: grid;
+    gap: 2rem;
+    align-items: center;
+    padding: 2rem;
+    @media (min-width: 900px) {
+      grid-template-columns: .8fr 1.2fr;
+      padding: 3rem 4rem 3rem 3rem;
+    }
+    img { width: 100%; max-width: 22rem; margin: 0 auto; display: block; }
+  }
+  h2 { font-size: clamp(2rem, 4.5vw, 3rem); margin-bottom: 1rem; }
+  p { color: $ink-soft; font-size: 1.1rem; max-width: 34rem; margin: 0; }
+}
+
+.how {
+  padding: 3rem 0 5rem;
+  h2 { font-size: clamp(2rem, 4.5vw, 3rem); margin-bottom: 2.5rem; max-width: 20ch; }
+
+  &__grid {
+    display: grid;
+    gap: 1.25rem;
+    @media (min-width: 900px) { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  }
+
+  &__steps {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 1rem;
+    counter-reset: step;
+    li {
+      counter-increment: step;
+      display: grid;
+      grid-template-columns: 3rem 1fr;
+      gap: 1rem;
+      align-items: start;
+      padding: 1.25rem 1.5rem;
+      border-radius: 20px;
+      background: $surface;
+      border: 1px solid $line;
+      &::before {
+        content: counter(step);
+        font-family: $headers-font;
+        font-weight: 800;
+        font-size: 1.5rem;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 14px;
+        display: grid;
+        place-items: center;
+        background: $tint;
+      }
+      &:last-child::before { background: $coral-wash; color: $coral-deep; }
+    }
+    h3 { font-size: 1.15rem; margin: .2rem 0 .25rem; }
+    p { color: $ink-soft; margin: 0; font-size: .95rem; }
+  }
+
+  &__preview {
+    border-radius: 20px;
+    background: $ink;
+    color: $surface;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2rem;
+    h3 { color: $surface; font-size: 1.4rem; margin-bottom: .25rem; }
+    p { color: rgba($surface, .7); margin: 0; }
+    .day-grid { max-width: 22rem; }
+    .day { background: rgba($surface, .08); color: rgba($surface, .6); border-color: transparent; }
+    .day.is-done { background: $coral; color: $ink; }
+  }
+}
+
+.faq {
+  padding: 3rem 0 5rem;
+  h2 { font-size: clamp(2rem, 4.5vw, 3rem); margin-bottom: 2rem; }
+  dl {
+    display: grid;
+    gap: 2rem 3rem;
+    margin: 0;
+    @media (min-width: 768px) { grid-template-columns: 1fr 1fr; }
+  }
+  dt { font-family: $headers-font; font-size: 1.2rem; margin-bottom: .4rem; }
+  dd { color: $ink-soft; margin: 0; max-width: 34rem; }
+}
+
+.closing {
+  padding: 1rem 0 5rem;
+  &__panel {
+    border-radius: 28px;
+    background: $coral-wash;
+    padding: 2.5rem 2rem;
+    display: grid;
+    gap: 2rem;
+    align-items: center;
+    @media (min-width: 900px) { grid-template-columns: 1.2fr .8fr; padding: 3.5rem 4rem; }
+    h2 { font-size: clamp(2rem, 4.5vw, 3rem); margin-bottom: 1.5rem; }
+    img { width: 100%; max-width: 20rem; margin: 0 auto; display: block; }
+  }
+}
+
+.site-footer {
+  border-top: 1px solid $line;
+  padding: 2rem 0;
+  font-size: .9rem;
+  color: $ink-soft;
+  .wrap { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: center; }
+  nav { display: flex; gap: 1.25rem; }
+  a { color: $ink-soft; &:hover { color: $ink; } }
+}

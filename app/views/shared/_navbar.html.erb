@@ -1,51 +1,36 @@
-<% if user_signed_in? %>
-  <div class="sidebar-wrapper">
-    <div data-toggle-navbar-target="sidebar" class="sidebar">
+<header class="topbar">
+  <div class="wrap topbar__inner">
+    <%= link_to (user_signed_in? ? groups_path : root_path), class: "topbar__brand" do %>
+      <%= image_tag "logo.svg", alt: "", width: 32, height: 32 %>
+      <span>21 Days Later</span>
+    <% end %>
 
-     <div class="d-flex align-items-center position-relative p-3">
-  <button class="closebtn" data-action="click->toggle-navbar#close"> &times; </button>
+    <% if user_signed_in? %>
+      <nav class="topbar__links" aria-label="Main">
+        <%= nav_link "My groups", groups_path, icon: "fa-layer-group" %>
+        <%= nav_link "New group", new_group_path, icon: "fa-plus" %>
+      </nav>
 
-  <div class="logo mx-auto">
-  <%= link_to root_path do %>
-    <%= image_tag "logo.svg", alt: "test" %>
-   <% end %></div>
-</div>
-
-
-      <div class="nav-links">
-        <div id="navbar_username" style="display: flex; align-items: center; gap: 40px;">
-      <% if current_user&.photo&.attached? %>
-         <%= cl_image_tag current_user.photo.key, class: "avatar-bordered", alt: "avatar", height: 40, width: 40, crop: :fill %>
-        <% end %>
-        <strong><%= current_user.username %></strong>
-      </div>
-
-
-      <%= link_to new_group_path, class: "#{'active' if current_page?(new_group_path)}" do %>
-        <i class="fa-solid fa-square-plus"></i> New Group
-      <% end %>
-
-      <%= link_to groups_path, class: "#{'active' if current_page?(groups_path)}" do %>
-        <i class="fa-solid fa-users"></i> Groups
-      <% end %>
-<hr>
-      <%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete } %>
+      <details class="topbar__user">
+        <summary aria-label="Account menu">
+          <%= avatar_for current_user, size: :sm %>
+          <span class="topbar__user-name"><%= current_user.display_name %></span>
+          <i class="fa-solid fa-chevron-down muted" style="font-size: .7rem" aria-hidden="true"></i>
+        </summary>
+        <div class="topbar__menu">
+          <%= link_to edit_user_registration_path do %>
+            <i class="fa-regular fa-user" aria-hidden="true"></i> Account
+          <% end %>
+          <%= button_to destroy_user_session_path, method: :delete do %>
+            <i class="fa-solid fa-arrow-right-from-bracket" aria-hidden="true"></i> Sign out
+          <% end %>
+        </div>
+      </details>
+    <% else %>
+      <nav class="topbar__links" aria-label="Main">
+        <%= link_to "Log in", new_user_session_path %>
+      </nav>
+      <%= link_to "Start a challenge", new_user_registration_path, class: "button button--small" %>
+    <% end %>
   </div>
-   <div data-controller="quotes">
-  <p data-quotes-target="message" class="loading-message"></p>
-  <blockquote class="quote-box">
-    <p data-quotes-target="quote" class="quote-text"></p>
-    <p data-quotes-target="author" class="quote-author"></p>
-  </blockquote>
-</div>
-</div>
-    </div>
-  </div>
-
-<i style="font-size:30px; cursor:pointer; display:none; background-color:white; color:purple; padding:10px; border-radius:5px; margin:10px;"
-   data-action="click->toggle-navbar#open"
-   data-toggle-navbar-target="open"
-   class="fa-solid fa-bars open-navbar-icon position-fixed">
-</i>
-
-<% end %>
+</header>

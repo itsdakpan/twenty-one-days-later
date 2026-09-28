@@ -1,48 +1,38 @@
-<br>
-<br>
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<% content_for :title, "Account" %>
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= f.error_notification %>
+<div class="wrap form-shell">
+  <%= link_to groups_path, class: "back-link" do %>
+    <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> My groups
+  <% end %>
 
-  <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true %>
+  <div class="form-card rise">
+    <h1>Your account</h1>
+    <p class="form-card__lead">Update your details. You'll need your current password to save.</p>
 
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true }) do |f| %>
+      <%= f.error_notification message: "Please fix the fields below." %>
+      <div class="row g-3">
+        <div class="col-sm-6"><%= f.input :first_name, required: true, input_html: { autocomplete: "given-name" } %></div>
+        <div class="col-sm-6"><%= f.input :last_name, required: true, input_html: { autocomplete: "family-name" } %></div>
+      </div>
+      <%= f.input :username, required: true, input_html: { autocomplete: "username" } %>
+      <%= f.input :email, required: true, input_html: { autocomplete: "email" } %>
+      <%= f.input :photo, as: :file, label: "Profile photo", input_html: { accept: "image/*" } %>
+      <%= f.input :password, label: "New password", hint: "Leave blank to keep your current one", required: false, input_html: { autocomplete: "new-password" } %>
+      <%= f.input :password_confirmation, label: "Confirm new password", required: false, input_html: { autocomplete: "new-password" } %>
+      <%= f.input :current_password, required: true, input_html: { autocomplete: "current-password" } %>
+      <div class="form-actions">
+        <%= f.button :submit, "Save changes", class: "button" %>
+        <%= link_to "Cancel", groups_path, class: "button button--ghost" %>
+      </div>
     <% end %>
-    <%= f.input :username,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "username" } %>
-     <%= f.input :first_name,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "first-name" } %>
-    <%= f.input :last_name,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "last-name" } %>
-    <%= f.input :password,
-                hint: "leave it blank if you don't want to change it",
-                required: false,
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
-                required: false,
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :current_password,
-                hint: "we need your current password to confirm your changes",
-                required: true,
-                input_html: { autocomplete: "current-password" } %>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Update" %>
+  <div class="form-card mt-4">
+    <h2 class="h4">Delete account</h2>
+    <p class="muted">This removes your groups, check-ins and comments. It can't be undone.</p>
+    <%= button_to "Delete my account", registration_path(resource_name), method: :delete,
+                  form: { data: { turbo_confirm: "Delete your account and all your data?" } },
+                  class: "button button--ghost" %>
   </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
-
-<%= link_to "Back", :back %>
+</div>

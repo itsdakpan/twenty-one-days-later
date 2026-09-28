@@ -1,0 +1,55 @@
+.auth {
+  min-height: 100dvh;
+  display: grid;
+  @media (min-width: 960px) { grid-template-columns: 1fr 1fr; }
+
+  &__art {
+    display: none;
+    @media (min-width: 960px) {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 2.5rem;
+      background: $tint;
+      position: relative;
+      overflow: hidden;
+    }
+    img.auth__illustration { width: 78%; max-width: 30rem; align-self: center; }
+    blockquote {
+      font-family: $headers-font;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      max-width: 22ch;
+      margin: 0;
+    }
+  }
+
+  &__panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem 1.25rem;
+    @media (min-width: 640px) { padding: 3rem; }
+  }
+
+  &__form {
+    width: 100%;
+    max-width: 26rem;
+    margin: 0 auto;
+    h1 { font-size: clamp(2rem, 5vw, 2.6rem); margin-bottom: .5rem; }
+    .auth__lead { color: $ink-soft; margin-bottom: 2rem; }
+  }
+
+  &__links {
+    margin-top: 1.5rem;
+    font-size: .925rem;
+    color: $ink-soft;
+    display: grid;
+    gap: .4rem;
+    a { font-weight: 500; color: $ink; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: $line; }
+  }
+
+  .topbar__brand { margin-bottom: 2.5rem; }
+}

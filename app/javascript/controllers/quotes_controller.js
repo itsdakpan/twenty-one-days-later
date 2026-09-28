@@ -1,30 +1,20 @@
 import { Controller } from "@hotwired/stimulus"
 
+// Fetches the quote of the day. Hides itself if the quote service is down.
 export default class extends Controller {
-  static targets = ["quote", "author", "message"]
+  static targets = ["quote", "author", "loading"]
 
-  connect() {
-    this.loadQuote()
-  }
-
-  async loadQuote() {
-    this.messageTarget.textContent = "Loading quote..."
-
+  async connect() {
     try {
-      const response = await fetch("/quotes/random")
-      if (!response.ok) throw new Error("Network response was not ok")
-
+      const response = await fetch("/quotes/random", { headers: { Accept: "application/json" } })
+      if (!response.ok) throw new Error(`Quote request failed: ${response.status}`)
       const data = await response.json()
-      if (data.error) throw new Error(data.error)
 
-      this.quoteTarget.textContent = `“${data.quote}”`
-      this.authorTarget.textContent = `— ${data.author}`
-      this.messageTarget.textContent = ""
+      this.quoteTarget.textContent = `"${data.quote}"`
+      this.authorTarget.textContent = data.author
+      this.loadingTarget.remove()
     } catch (error) {
-      this.messageTarget.textContent = "Sorry, we couldn't load a quote at the moment."
-      this.quoteTarget.textContent = ""
-      this.authorTarget.textContent = ""
-      console.error("Error fetching quote:", error)
+      this.element.hidden = true
     }
   }
 }
