@@ -1,18 +1,4 @@
-// Import Google fonts
-@import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700");
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Nunito:400,700|Work+Sans:400,700&display=swap');
-
-// Define fonts for body and headers
-$body-font: "Noto Sans","Work Sans", "Helvetica", "sans-serif";
-$headers-font: "Poppins","Noto Sans","Nunito", "Helvetica", "sans-serif";
-
-// To use a font file (.woff) uncomment following lines
-// @font-face {
-//   font-family: "Font Name";
-//   src: font-url('FontFile.eot');
-//   src: font-url('FontFile.eot?#iefix') format('embedded-opentype'),
-//        font-url('FontFile.woff') format('woff'),
-//        font-url('FontFile.ttf') format('truetype')
-// }
-// $my-font: "Font Name";
+// Fonts are loaded from Google Fonts in the layout <head>.
+// Bricolage Grotesque for display type, Geist for everything else.
+$body-font: "Geist", "Helvetica Neue", Arial, sans-serif;
+$headers-font: "Bricolage Grotesque", "Geist", "Helvetica Neue", Arial, sans-serif;

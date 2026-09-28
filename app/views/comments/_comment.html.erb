@@ -1,0 +1,22 @@
+<article class="comment" id="<%= dom_id(comment) %>" data-controller="likes" data-likes-url-value="<%= group_comment_path(comment.group, comment) %>">
+  <%= avatar_for comment.user, size: :sm %>
+  <div>
+    <div class="comment__meta">
+      <span class="comment__author"><%= comment.user == current_user ? "You" : comment.user.display_name %></span>
+      <time class="comment__time" datetime="<%= comment.created_at.iso8601 %>"><%= time_ago_in_words(comment.created_at) %> ago</time>
+    </div>
+    <p class="comment__body"><%= comment.message %></p>
+    <div class="comment__actions">
+      <button type="button" class="icon-button" data-action="likes#like" data-likes-target="button" aria-label="Like this comment">
+        <i class="fa-regular fa-heart" aria-hidden="true"></i>
+      </button>
+      <span class="like-count" data-likes-target="count"><%= comment.likes %></span>
+      <% if comment.user == current_user %>
+        <%= button_to group_comment_path(comment.group, comment), method: :delete, class: "icon-button icon-button--danger",
+                      form: { data: { turbo_confirm: "Delete this comment?" } }, aria: { label: "Delete comment" } do %>
+          <i class="fa-regular fa-trash-can" aria-hidden="true"></i>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,183 @@
+.group-hero {
+  display: grid;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  @media (min-width: 900px) { grid-template-columns: 1fr auto; align-items: end; }
+
+  h1 { font-size: clamp(2.4rem, 6vw, 3.8rem); font-weight: 800; letter-spacing: -0.035em; margin: .75rem 0 .5rem; }
+  &__challenge { font-size: 1.15rem; margin: 0; strong { font-weight: 600; } }
+  &__reason { color: $ink-soft; margin: .35rem 0 0; max-width: 40rem; }
+  &__actions { display: flex; gap: .5rem; flex-wrap: wrap; }
+}
+
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  > div {
+    padding: 1.1rem 1.25rem;
+    border-radius: 20px;
+    background: $surface;
+    border: 1px solid $line;
+  }
+  .stat-row__value {
+    font-family: $headers-font;
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    font-weight: 800;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .stat-row__label { color: $ink-soft; font-size: .85rem; margin-top: .35rem; }
+  @media (max-width: 520px) { grid-template-columns: 1fr 1fr; > div:last-child { grid-column: span 2; } }
+}
+
+.section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+  h2 { font-size: 1.6rem; margin: 0; }
+  p { margin: 0; color: $ink-soft; font-size: .9rem; }
+}
+
+.board {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 3.5rem;
+}
+
+.member {
+  @extend .card-surface;
+  display: grid;
+  gap: 1.25rem;
+  padding: 1.25rem;
+  @media (min-width: 768px) {
+    grid-template-columns: 14rem 1fr;
+    align-items: center;
+    padding: 1.25rem 1.5rem;
+  }
+
+  &.is-me { border-color: rgba($ink, .35); }
+
+  &__who { display: flex; align-items: center; gap: .85rem; }
+  &__name { font-weight: 600; line-height: 1.2; }
+  &__count { color: $ink-soft; font-size: .85rem; font-variant-numeric: tabular-nums; }
+}
+
+.day-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: .4rem;
+  @media (min-width: 1000px) { grid-template-columns: repeat(21, 1fr); gap: .35rem; }
+}
+
+.day {
+  aspect-ratio: 1;
+  min-width: 0;
+  border-radius: 10px;
+  border: 1px solid $line;
+  background: $paper;
+  color: $ink-faint;
+  font-size: .75rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  transition: background .2s $ease, color .2s $ease, transform .25s $ease, border-color .2s $ease;
+
+  &.is-done { background: $coral; border-color: $coral; color: $ink; }
+  &.is-today { border-color: $ink; border-width: 2px; }
+  &.is-locked { opacity: .45; }
+
+  &:is(button) { cursor: pointer; }
+  &:is(button):hover:not(:disabled) { border-color: $ink; transform: translateY(-2px); }
+  &:is(button):active:not(:disabled) { transform: scale(.94); }
+  &:disabled { cursor: not-allowed; }
+
+  &.pop { animation: pop .45s $ease; }
+}
+@keyframes pop { 40% { transform: scale(1.18); } }
+
+.board-empty {
+  @extend .card-surface;
+  padding: 2rem;
+  text-align: center;
+  p { color: $ink-soft; }
+}
+
+// Comments
+.comments {
+  display: grid;
+  gap: 1.5rem;
+  @media (min-width: 900px) { grid-template-columns: 22rem 1fr; align-items: start; }
+}
+
+.comment-form {
+  @extend .card-surface;
+  padding: 1.25rem;
+  textarea { min-height: 7rem; resize: vertical; }
+  .form-actions { margin-top: 1rem; }
+  @media (min-width: 900px) { position: sticky; top: 5.5rem; }
+}
+
+.comment-list { display: grid; gap: .75rem; }
+
+.comment {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: .9rem;
+  padding: 1rem 1.25rem;
+  border-radius: 20px;
+  background: $surface;
+  border: 1px solid $line;
+
+  &__meta { display: flex; gap: .5rem; align-items: baseline; flex-wrap: wrap; }
+  &__author { font-weight: 600; }
+  &__time { color: $ink-faint; font-size: .8rem; }
+  &__body { margin: .25rem 0 .5rem; overflow-wrap: anywhere; }
+  &__actions { display: flex; gap: .25rem; align-items: center; margin-left: -.5rem; }
+  .like-count { font-size: .85rem; color: $ink-soft; font-variant-numeric: tabular-nums; }
+  .liked { color: $coral-deep; }
+}
+
+.comment-empty { color: $ink-soft; padding: 1rem 0; }
+
+// Finishing all 21 days
+.celebrate {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  background: rgba($ink, .4);
+  animation: flash-in .3s $ease both;
+
+  &__card {
+    background: $surface;
+    border-radius: 28px;
+    padding: 2.5rem 3rem;
+    text-align: center;
+    max-width: 24rem;
+    box-shadow: 0 40px 80px -30px rgba($ink, .6);
+    animation: rise .5s $ease both;
+    h2 { font-size: 2rem; margin-bottom: .5rem; }
+    p { color: $ink-soft; margin-bottom: 1.5rem; }
+  }
+
+  &__badge {
+    width: 5rem;
+    height: 5rem;
+    margin: 0 auto 1.25rem;
+    border-radius: 22px;
+    background: $coral;
+    display: grid;
+    place-items: center;
+    font-family: $headers-font;
+    font-weight: 800;
+    font-size: 1.8rem;
+  }
+}

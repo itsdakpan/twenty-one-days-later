@@ -3,10 +3,15 @@ class Group < ApplicationRecord
   has_many :group_memberships, dependent: :destroy
   has_many :members, through: :group_memberships, source: :user
   has_many :comments, dependent: :destroy
-
   has_many :goals, dependent: :destroy
 
   validates :name, presence: true
 
+  def goal
+    goals.first
+  end
 
+  def owned_by?(someone)
+    user_id == someone&.id
+  end
 end

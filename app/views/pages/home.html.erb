@@ -1,145 +1,123 @@
-<body class="landing-page">
-<header class="header">
-  <div class="container">
-    <div class="header-content">
-      <div class="logo">
-         <%= image_tag "logo.svg", alt: "test" %>
+<% content_for :body_class, "landing" %>
+
+<section class="hero">
+  <div class="wrap hero__grid">
+    <div>
+      <h1 class="rise">A new you in <em>21 days.</em></h1>
+      <p class="hero__lead rise" style="--i: 1">Pick one habit, invite the people who keep you honest, and tick off every day together.</p>
+      <div class="hero__actions rise" style="--i: 2">
+        <%= link_to "Start a challenge", (user_signed_in? ? new_group_path : new_user_registration_path), class: "button" %>
+        <%= link_to "Log in", new_user_session_path, class: "button button--ghost" unless user_signed_in? %>
       </div>
-      <div class="header-buttons">
-            <%= link_to "SIGN UP!", new_user_registration_path, class: "sign-up-btn" %>
-         <%= link_to "LOGIN", new_user_session_path, class: "login-btn" %>
+    </div>
+    <div class="hero__art rise" style="--i: 1">
+      <%= image_tag "fv1.png", alt: "Two friends helping each other climb to a flag at the top of a mountain", width: 422, height: 420, fetchpriority: "high" %>
+    </div>
+  </div>
+</section>
+
+<section class="together">
+  <div class="wrap">
+    <div class="together__panel">
+      <%= image_tag "intro.png", alt: "A runner surrounded by hands giving a thumbs up", width: 540, height: 540, loading: "lazy" %>
+      <div>
+        <h2>It's hard to change alone. Together, it sticks.</h2>
+        <p>21 Days Later is a shared check-in board for friends, families and teams. Everyone sees who showed up today, so nobody quietly gives up.</p>
       </div>
     </div>
   </div>
-</header>
+</section>
 
- <section class="FV">
-        <div class="container">
-            <div class="FV-content">
-                <div class="FV-title">
-                 <div class="FV-image">
-                    <%= image_tag "fv1.png", alt: "test" %>
-                </div>
+<section class="how" id="how-it-works">
+  <div class="wrap">
+    <h2>Four steps from idea to habit.</h2>
+    <div class="how__grid">
+      <ol class="how__steps">
+        <li>
+          <div>
+            <h3>Pick a habit</h3>
+            <p>Running, reading, no phone after 10pm. Anything you can do once a day.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Invite your people</h3>
+            <p>Add friends or family by username. Everyone gets the same 21-day board.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Check in daily</h3>
+            <p>Tap today's square when you've done it. Leave a comment to push the group along.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Finish together</h3>
+            <p>Fill all 21 squares and the habit is yours. Then pick the next one.</p>
+          </div>
+        </li>
+      </ol>
 
-                    <h1>A New You in 21 Days.</h1>
-                    <p>Build better habits together with friends and family.</p>
-                   <%= link_to "Let's start!", new_group_path, class: "btn-fv" %>
-                </div>
-                <div class="FV-image">
-                    <%= image_tag "fv2.png", alt: "test" %>
-                </div>
-            </div>
+      <div class="how__preview" aria-hidden="true">
+        <div>
+          <h3>Your board, day 13</h3>
+          <p>Twelve done, one missed, eight to go.</p>
         </div>
-
-    </section>
-    <section class="intro">
-        <div class="container">
-            <div class="intro-content">
-                <div class="intro-left">
-                    <p>It's hard to change alone.<br>But together, we can grow.</p>
-                </div>
-                  <div class="intro-image">
-                    <%= image_tag "intro.png", alt: "test" %>
-                </div>
-                <div class="intro-right">
-                    <p class="description-text">21days later helps people support each other <br>to build lasting habits one day at a time.</p>
-                </div>
-            </div>
+        <div class="day-grid" style="grid-template-columns: repeat(7, 1fr)">
+          <% done = [0, 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12] %>
+          <% 21.times do |i| %>
+            <span class="day <%= 'is-done' if done.include?(i) %>"><%= i + 1 %></span>
+          <% end %>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <section class="why-section">
-        <div class="container">
-            <h2 class="why-title">Why It Works</h2>
-            <div class="features-grid">
-                <div class="feature">
-                    <h3>1</h3>
-                    <p>Backed by Habit Science Studies show that it takes about 21 days to form a new habit.</p>
-                </div>
-                <div class="feature">
-                    <h3>2</h3>
-                    <p>Simple Daily Check-ins Track your progress with a friendly interface and celebrate small wins.</p>
-                </div>
-                <div class="feature">
-                    <h3>3</h3>
-                    <p>You're Not Alone Invite friends or family and build new habits together. Encouragement keeps you going.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<section class="faq">
+  <div class="wrap">
+    <h2>Questions people ask.</h2>
+    <dl>
+      <div>
+        <dt>Is it free?</dt>
+        <dd>Yes. Make an account, start a group, invite as many people as you like.</dd>
+      </div>
+      <div>
+        <dt>Why 21 days?</dt>
+        <dd>Three weeks is long enough to build a routine and short enough to stay motivated the whole way.</dd>
+      </div>
+      <div>
+        <dt>Can I pick any habit?</dt>
+        <dd>Anything you can do once a day. Exercise, reading, cooking at home or less screen time.</dd>
+      </div>
+      <div>
+        <dt>What if I miss a day?</dt>
+        <dd>Your board shows the gap, and you carry on the next day. Showing up again is what counts.</dd>
+      </div>
+    </dl>
+  </div>
+</section>
 
-    <section class="how-section">
-        <div class="container">
-            <h2 class="how-title">How It Works</h2>
-            <div class="how-content">
-                <div class="how-image">
-                    <%= image_tag "howitworks.png", alt: "test" %>
-                </div>
-                <div>
-                    <ul class="steps-list">
-                        <li><span class="step-number">1.</span> Choose your new habit </li>
-                        <li><span class="step-number">2.</span> Create a challenge and invite others</li>
-                        <li><span class="step-number">3.</span> Complete it together for 21 days</li>
-                        <li><span class="step-number">4.</span> Earn a badge and build momentum!</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+<section class="closing">
+  <div class="wrap">
+    <div class="closing__panel">
+      <div>
+        <h2>Your next habit starts on day one.</h2>
+        <%= link_to "Start a challenge", (user_signed_in? ? new_group_path : new_user_registration_path), class: "button" %>
+      </div>
+      <%= image_tag "fv2.png", alt: "Three people adjusting sliders together", width: 540, height: 380, loading: "lazy" %>
+    </div>
+  </div>
+</section>
 
-    <section class="reviews-section">
-        <div class="container">
-            <h2 class="section-title">Review</h2>
-            <div class="reviews-grid">
-                <div class="review">
-                    <p>"I could never keep habits on my own. Doing it with my sister made it fun and doable."</p>
-                </div>
-                <div class="review">
-                    <p>"I could never keep habits on my own. Doing it with my family made it fun and doable."</p>
-                </div>
-                <div class="review">
-                    <p>"I live far from my best friend, but we stayed connected and started waking up early together!"</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="faq-section">
-        <div class="container">
-            <h2 class="section-title">FAQ</h2>
-            <div class="faq-item">
-                <div class="faq-question"> Is it free to use?</div>
-                <div class="faq-answer">Yes! There's a free plan to get started.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question"> Can I invite a group?</div>
-                <div class="faq-answer">Absolutely. Team up with as many friends or family as you like.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question"> Can I choose any habit?</div>
-                <div class="faq-answer">Yes! Whether it's exercise, mindfulness, or reducing screen time – it's up to you.</div>
-            </div>
-        </div>
-    </section>
-
-
-<footer>
-        <div class="container">
-            <div class="footer-nav">
-                <ul>
-                    <li> <%= link_to "Home", root_path %></li>
-                    <li>  <%= link_to "Sign up", new_user_registration_path %></li>
-                </ul>
-            </div>
-            <div class="social-icons">
-                <a href="#"><i class="fab fa-youtube"></i></a>
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-            </div>
-        </div>
-        <div class="copyright">
-            <p class="copyrighttext">&copy; 2025 - 21 days later</p>
-        </div>
-    </footer>
-</body>
+<footer class="site-footer">
+  <div class="wrap">
+    <span>&copy; <%= Date.current.year %> 21 Days Later. Built at Le Wagon.</span>
+    <nav aria-label="Footer">
+      <%= link_to "How it works", "#how-it-works" %>
+      <%= link_to "Log in", new_user_session_path %>
+      <%= link_to "Sign up", new_user_registration_path %>
+    </nav>
+  </div>
+</footer>

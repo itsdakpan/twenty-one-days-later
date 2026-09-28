@@ -1,13 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title><%= content_for(:title) || "Twenty One Days Later" %></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title><%= content_for?(:title) ? "#{yield(:title)} | 21 Days Later" : "21 Days Later | Build habits together" %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Build a new habit in 21 days with friends and family. Set a challenge, check in daily and keep each other going.">
+    <meta name="theme-color" content="#F5F4F8">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
 
     <%= yield :head %>
 
@@ -15,32 +19,19 @@
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-
-    <!-- Tom Select CSS -->
     <%= stylesheet_link_tag "https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css" %>
-
-    <!-- Tom Select JS -->
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js" %>
+    <%= javascript_importmap_tags %>
   </head>
 
-  <body data-controller="toggle-navbar">
-
-    <%# <% if controller_name == "" && action_name == "" %>
-
-    <% unless controller_name == "pages" %>
-
-     <%= render "shared/navbar" %>
-
-    <% end %>
-
+  <body class="<%= yield(:body_class) %>">
+    <a href="#main" class="skip-link">Skip to content</a>
+    <%= render "shared/navbar" unless content_for?(:bare) %>
     <%= render "shared/flashes" %>
 
-
-    <div class="main-content" data-toggle-navbar-target="main">
+    <main id="main">
       <%= yield %>
-    </div>
-
+    </main>
   </body>
 </html>

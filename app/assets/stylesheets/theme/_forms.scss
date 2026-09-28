@@ -1,0 +1,83 @@
+.form-shell {
+  max-width: 34rem;
+  margin: 0 auto;
+  padding-top: 3rem;
+  padding-bottom: 5rem;
+}
+
+.form-card {
+  @extend .card-surface;
+  padding: 2rem;
+  @media (min-width: 640px) { padding: 2.5rem; }
+
+  h1 { font-size: clamp(1.75rem, 4vw, 2.25rem); margin-bottom: .5rem; }
+  .form-card__lead { color: $ink-soft; margin-bottom: 2rem; }
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  margin-bottom: 1.25rem;
+  font-size: .9rem;
+  color: $ink-soft;
+}
+
+.field { margin-bottom: 1.25rem; }
+
+label, .form-label { font-weight: 500; font-size: .925rem; color: $ink; }
+
+.form-control, .form-select {
+  border-radius: 12px;
+  transition: border-color .2s $ease, box-shadow .2s $ease;
+}
+
+.form-text, .form-hint { color: $ink-soft; font-size: .85rem; margin-top: .35rem; }
+
+.invalid-feedback { color: $coral-deep; }
+.form-control.is-invalid { border-color: $coral-deep; }
+
+.form-errors {
+  padding: .9rem 1.1rem;
+  border-radius: 12px;
+  background: $coral-wash;
+  color: $coral-deep;
+  font-size: .9rem;
+  margin-bottom: 1.5rem;
+  ul { margin: .25rem 0 0; padding-left: 1.1rem; }
+}
+
+.form-actions {
+  display: flex;
+  gap: .75rem;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.form-check-input:checked { background-color: $ink; border-color: $ink; }
+
+// Tom Select, restyled to match the inputs.
+.ts-wrapper .ts-control {
+  border-radius: 12px;
+  border-color: $line;
+  background: $surface;
+  padding: .6rem .75rem;
+  min-height: 3rem;
+  box-shadow: none;
+}
+.ts-wrapper.focus .ts-control { border-color: $ink; box-shadow: 0 0 0 4px rgba($ink, .12); }
+.ts-wrapper.multi .ts-control > .item {
+  background: $tint;
+  border: 0;
+  border-radius: 8px;
+  color: $ink;
+  padding: .2rem .5rem;
+}
+.ts-dropdown {
+  border-radius: 12px;
+  border-color: $line;
+  box-shadow: 0 16px 32px -16px rgba($ink, .3);
+  .active { background: $tint; color: $ink; }
+}
+.ts-wrapper .ts-control, .ts-wrapper .ts-control input { font-size: 1rem; }
+abbr[title] { text-decoration: none; cursor: default; color: $coral-deep; }

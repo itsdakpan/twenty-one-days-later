@@ -1,0 +1,30 @@
+<%= form_with model: [@group, @goal] do |f| %>
+  <% if @goal.errors.any? %>
+    <div class="form-errors" role="alert">
+      <strong>Couldn't save the challenge.</strong>
+      <ul><% @goal.errors.full_messages.each do |message| %><li><%= message %></li><% end %></ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name, "The habit", class: "form-label" %>
+    <%= f.text_field :name, class: "form-control", placeholder: "e.g. Run 3km every morning", required: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :reason, "Why it matters", class: "form-label" %>
+    <%= f.text_area :reason, class: "form-control", rows: 3, placeholder: "e.g. Get fit for the half marathon in spring", required: true %>
+    <p class="form-hint">The group sees this on the board. It helps on the hard days.</p>
+  </div>
+
+  <div class="field">
+    <%= f.label :start_date, "Day one", class: "form-label" %>
+    <%= f.date_field :start_date, class: "form-control", required: true %>
+    <p class="form-hint">The challenge runs for 21 days from this date.</p>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit submit_label, class: "button" %>
+    <%= link_to "Cancel", group_path(@group), class: "button button--ghost" %>
+  </div>
+<% end %>

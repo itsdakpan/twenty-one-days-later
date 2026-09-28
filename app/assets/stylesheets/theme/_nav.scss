@@ -1,0 +1,92 @@
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba($paper, .85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba($line, .8);
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    height: 4rem;
+  }
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    font-family: $headers-font;
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+    img { width: 2rem; height: 2rem; }
+  }
+
+  &__links {
+    display: flex;
+    gap: .25rem;
+    margin-left: auto;
+    a {
+      padding: .45rem .9rem;
+      border-radius: 999px;
+      font-weight: 500;
+      font-size: .925rem;
+      color: $ink-soft;
+      &:hover { color: $ink; background: $tint; }
+      &.is-active { color: $ink; background: $tint; }
+    }
+  }
+
+  &__user {
+    position: relative;
+    summary {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      cursor: pointer;
+      padding: .25rem;
+      border-radius: 14px;
+      &::-webkit-details-marker { display: none; }
+      &:hover { background: $tint; }
+    }
+    &-name { font-weight: 500; font-size: .925rem; }
+  }
+
+  &__menu {
+    position: absolute;
+    right: 0;
+    top: calc(100% + .5rem);
+    min-width: 12rem;
+    padding: .4rem;
+    background: $surface;
+    border: 1px solid $line;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px -20px rgba($ink, .35);
+    animation: rise .25s $ease both;
+    a, button {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      width: 100%;
+      padding: .55rem .75rem;
+      border: 0;
+      background: none;
+      border-radius: 10px;
+      font-size: .925rem;
+      color: $ink;
+      text-align: left;
+      &:hover { background: $tint; }
+    }
+    form { margin: 0; }
+  }
+
+  @media (max-width: 640px) {
+    &__links a span { display: none; }
+    &__user-name { display: none; }
+    &__inner { gap: .75rem; }
+  }
+}

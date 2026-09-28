@@ -1,49 +1,38 @@
+<% content_for :title, "New group" %>
 
-<br>
-<br>
-<div class="form-container">
-  <h1>New Group</h1>
-
-  <%= form_with(model: @group, local: true, data: { turbo: false }) do |form| %>
-    <div>
-      <%= form.label :name %>
-      <%= form.text_field :name, placeholder: "Smith family"%>
-    </div>
-    <div>
-      <%= label_tag :user_username, "Invite Members by Username" %>
-      <%= select_tag "group[user_usernames][]", "", multiple: true, id: "user-usernames", class: "form-control", placeholder: "sam.smith123" %>
-    </div>
-    <div>
-      <%= form.submit "We got this!", class: "btn btn-primary btn-custom" %>
-    </div>
+<div class="wrap form-shell">
+  <%= link_to groups_path, class: "back-link" do %>
+    <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> My groups
   <% end %>
-</div>
 
-<script>
-document.addEventListener("turbo:load", () => {
-  const users = [
-    <% User.where.not(id: current_user.id).each do |user| %>
-      { username: "<%= user.username %>" },
+  <div class="form-card rise">
+    <h1>New group</h1>
+    <p class="form-card__lead">Who's doing this with you? You'll set the challenge next.</p>
+
+    <%= form_with model: @group, data: { turbo: false } do |form| %>
+      <% if @group.errors.any? %>
+        <div class="form-errors" role="alert">
+          <strong>Couldn't create the group.</strong>
+          <ul><% @group.errors.full_messages.each do |message| %><li><%= message %></li><% end %></ul>
+        </div>
+      <% end %>
+
+      <div class="field">
+        <%= form.label :name, "Group name", class: "form-label" %>
+        <%= form.text_field :name, class: "form-control", placeholder: "e.g. Morning runners", required: true, autofocus: true %>
+      </div>
+
+      <div class="field">
+        <%= label_tag "user-usernames", "Invite people", class: "form-label" %>
+        <%= select_tag "group[user_usernames][]", options_for_select(@usernames), multiple: true, id: "user-usernames",
+                       data: { controller: "user-select" }, placeholder: "Search by username" %>
+        <p class="form-hint">You can start on your own and share the group later.</p>
+      </div>
+
+      <div class="form-actions">
+        <%= form.submit "Create group", class: "button" %>
+        <%= link_to "Cancel", groups_path, class: "button button--ghost" %>
+      </div>
     <% end %>
-  ];
-  const select = document.getElementById("user-usernames");
-  if (select && users.length > 0) {
-    users.forEach(user => {
-      const option = document.createElement("option");
-      option.value = user.username;
-      option.textContent = user.username;
-      select.appendChild(option);
-    });
-    new TomSelect("#user-usernames", {
-      plugins: ['remove_button'],
-      create: false,
-      persist: false
-    });
-  } else {
-    console.warn("No users found to populate the dropdown.");
-  }
-});
-</script>
-
-<br>
-<br>
+  </div>
+</div>
